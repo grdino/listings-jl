@@ -12,10 +12,10 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ListingPage({ listing }) {
-  const whatsappNumberE164 = "523221812109";
-  const contactEmail = "gerry@ronmorgan.net";
-  const phoneNumber = "+52 (322) 181-2109";
-  const googleFormLink = "https://docs.google.com/forms/d/e/1FAIpQLSd1KPuW_3fc5cxJTt6tjSVDi-pVOUckEzkZERSTfkd85DHkSw/viewform?usp=sf_link";
+  const whatsappNumberE164 = "523221900492";
+  const contactEmail = "joselo@ronmorgan.net";
+  const phoneNumber = "+52 (322) 190-0492";
+  const googleFormLink = "https://docs.google.com/forms/d/e/1FAIpQLScFd3eXmE3mfKfb9NtqT9htyeQLxjBZWnPPR5tGMBKbUrqCig/viewform?usp=header";
 
   const whatsappLink = `https://wa.me/${whatsappNumberE164}?text=${encodeURIComponent(
     `Hi! I'm interested in ${listing.title} in ${listing.addressOrArea}. Can you share details and availability?`
@@ -27,7 +27,7 @@ export default function ListingPage({ listing }) {
     `Hi,\n\nI'm interested in ${listing.title} in ${listing.addressOrArea}.\n\nMy timeline is:\nMy budget range is:\nI plan to use it for (personal / investment / both):\n\nPlease send details (price, HOA, taxes, showing options).\n\nThanks!`
   )}`;
 
-  const contactPageLink = `https://contact.gerryray.net/?listing=${encodeURIComponent(
+  const contactPageLink = `https://contact.joselo.net/?listing=${encodeURIComponent(
     listing.slug
   )}`;
 
