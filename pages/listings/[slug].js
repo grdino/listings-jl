@@ -37,12 +37,18 @@ export default function ListingPage({ listing }) {
         <title>
           {listing.title} | {listing.addressOrArea}
         </title>
-        <meta name="description" content={listing.subtitle} />
+        <meta
+          name="description"
+          content={listing.seoDescription || listing.subtitle}
+        />
         <meta
           property="og:title"
           content={`${listing.title} | ${listing.addressOrArea}`}
         />
-        <meta property="og:description" content={listing.subtitle} />
+        <meta
+          property="og:description"
+          content={listing.seoDescription || listing.subtitle}
+        />
         {listing.photos?.[0]?.src && (
           <meta property="og:image" content={listing.photos[0].src} />
         )}
@@ -109,6 +115,12 @@ export default function ListingPage({ listing }) {
             </div>
           </div>
         </header>
+
+        {listing.seoIntro && (
+          <section className="seoIntro">
+          <p>{listing.seoIntro}</p>
+          </section>
+        )}
 
         {/* GALLERY */}
         <section className="section">
@@ -328,6 +340,18 @@ export default function ListingPage({ listing }) {
 
           .section {
             margin-top: 34px;
+          }
+
+          .seoIntro {
+            max-width: 1000px;
+            margin-top: 22px;
+          }
+
+          .seoIntro p {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #334155;
           }
 
           .grid {
