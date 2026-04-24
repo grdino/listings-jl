@@ -503,6 +503,7 @@ export default function ListingPage({ listing }) {
 
             .factLabel {
               font-size: 11px;
+              font-weight: 700;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -510,7 +511,7 @@ export default function ListingPage({ listing }) {
 
             .factValue {
               font-size: 12px;
-              font-weight: 700;
+              font-weight: 400;
             }
 
             .grid {
