@@ -122,6 +122,28 @@ export default function ListingPage({ listing }) {
           </section>
         )}
 
+        {listing.seoSections?.length > 0 && (
+          <section className="seoBody">
+            {listing.seoSections.map((section) => (
+              <section key={section.heading} className="seoSection">
+                <h2>{section.heading}</h2>
+
+                {section.paragraphs?.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+
+                {section.list && (
+                  <ul className="seoList">
+                    {section.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+          </section>
+        )}
+
         {/* GALLERY */}
         <section className="section">
           <h2>Photo Gallery</h2>
