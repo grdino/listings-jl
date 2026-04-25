@@ -35,9 +35,7 @@ export default function ListingPage({ listing }) {
   return (
     <>
       <Head>
-        <title>
-          {listing.title} | {listing.addressOrArea}
-        </title>
+        <title>{`${listing.title} | ${listing.addressOrArea}`}</title>
         <meta
           name="description"
           content={listing.seoDescription || listing.subtitle}
