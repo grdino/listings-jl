@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { LISTINGS, getListing } from "../../lib/listings";
+import ListingPhotoGallery from "../../components/ListingPhotoGallery";
 
 export async function getStaticPaths() {
   const paths = Object.keys(LISTINGS).map((slug) => ({ params: { slug } }));
@@ -106,14 +107,7 @@ export default function ListingPage({ listing }) {
             )}
           </div>
 
-          <div className="heroMedia">
-            <div className="cover">
-              <img
-                src={listing.photos?.[0]?.src || "/photos/placeholder.jpg"}
-                alt={listing.photos?.[0]?.alt || "Property photo"}
-              />
-            </div>
-          </div>
+          <ListingPhotoGallery photos={listing.photos} title={listing.title} />
         </header>
 
         {listing.seoIntro && (
