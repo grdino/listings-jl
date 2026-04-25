@@ -35,6 +35,10 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
           width: 100%;
           margin: 32px 0;
         }
+        
+        .mobile-gallery-note {
+          display: none;
+        }
 
         .gallery-grid {
           display: grid;
@@ -90,6 +94,16 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
         }
 
         @media (max-width: 768px) {
+        .mobile-gallery-note {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #555;
+          }
+          
           .gallery-grid {
             display: block;
             height: auto;
@@ -107,6 +121,8 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
         }
       `}</style>
 
+      <div className="mobile-gallery-note">Tap Photo to View Full Gallery</div>
+      
       <div className="gallery-grid">
         <button className="gallery-main" onClick={() => setIndex(0)}>
           <img src={photos[0].src} alt={photos[0].alt || title} />
