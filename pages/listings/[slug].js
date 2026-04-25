@@ -136,17 +136,17 @@ export default function ListingPage({ listing }) {
           </section>
         )}
 
-        {/* GALLERY */}
-        <section className="section">
-          <h2>Photo Gallery</h2>
-          <div className="grid">
-            {(listing.photos || []).slice(1).map((p) => (
-              <div key={p.src} className="gridItem">
-                <img src={p.src} alt={p.alt} />
-              </div>
-            ))}
-          </div>
-        </section>
+    //    {/* GALLERY */}
+    //    <section className="section">
+    //      <h2>Photo Gallery</h2>
+    //      <div className="grid">
+    //        {(listing.photos || []).slice(1).map((p) => (
+    //          <div key={p.src} className="gridItem">
+    //            <img src={p.src} alt={p.alt} />
+    //          </div>
+    //        ))}
+    //      </div>
+    //    </section>
 
         {/* DETAILS + CONTACT */}
         <section className="section twoCol">
