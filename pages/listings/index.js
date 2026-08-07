@@ -4,7 +4,9 @@ import { LISTINGS } from "../../lib/listings";
 export default function ListingsIndex() {
   const items = Object.values(LISTINGS);
 
-  const activeListings = items.filter((l) => l.status !== "sold");
+  const activeListings = items
+    .filter((l) => l.status !== "sold")
+    .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
   const soldListings = items.filter((l) => l.status === "sold");
 
   return (
