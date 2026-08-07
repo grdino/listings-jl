@@ -62,7 +62,7 @@ export default function ListingPage({ listing }) {
             className="homeLink"
           >
             <Image
-              src="/images/joselo-logo.png"
+              src="/photos/JoseloLogoHighRes.png"
               alt="Joselo.net"
               width={140}
               height={42}
