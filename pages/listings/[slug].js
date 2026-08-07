@@ -54,6 +54,11 @@ export default function ListingPage({ listing }) {
       </Head>
 
       <main className="page">
+
+        <div className="topNav">
+          <a href="https://www.joselo.net">← Home</a>
+        </div>
+      
         {/* HERO */}
         <header className="hero">
           <div className="heroText">
@@ -251,6 +256,21 @@ export default function ListingPage({ listing }) {
             font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
               Roboto, Helvetica, Arial;
             color: #0f172a;
+          }
+
+          .topNav {
+            margin-bottom: 12px;
+            font-size: 14px;
+          }
+          
+          .topNav a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 600;
+          }
+          
+          .topNav a:hover {
+            color: #2563eb;
           }
 
           .hero {
