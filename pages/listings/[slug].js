@@ -56,7 +56,17 @@ export default function ListingPage({ listing }) {
       <main className="page">
 
         <div className="topNav">
-          <a href="https://www.joselo.net">← Home</a>
+          <a
+            href="https://www.joselo.net"
+            className="homeLink"
+          >
+            <span className="homeIcon">🏠</span>
+        
+            <span className="homeText">
+              <span className="brand">Joselo.net</span>
+              <span className="tagline">Discover More Properties</span>
+            </span>
+          </a>
         </div>
       
         {/* HERO */}
@@ -259,18 +269,73 @@ export default function ListingPage({ listing }) {
           }
 
           .topNav {
-            margin-bottom: 12px;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
           }
           
-          .topNav a {
-            color: #475569;
+          .homeLink {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+          
+            padding: 12px 22px;
+          
             text-decoration: none;
-            font-weight: 600;
+          
+            border-radius: 999px;
+          
+            background: linear-gradient(
+              135deg,
+              #fffdf8 0%,
+              #f9f3e5 45%,
+              #ecd9a5 100%
+            );
+          
+            border: 1px solid #d6b15b;
+          
+            box-shadow:
+              0 0 10px rgba(212,175,55,.30),
+              0 0 24px rgba(212,175,55,.15),
+              0 8px 22px rgba(0,0,0,.08);
+          
+            transition: all .25s ease;
           }
           
-          .topNav a:hover {
-            color: #2563eb;
+          .homeLink:hover {
+          
+            transform: translateY(-2px);
+          
+            box-shadow:
+              0 0 18px rgba(212,175,55,.55),
+              0 0 42px rgba(212,175,55,.35),
+              0 14px 34px rgba(0,0,0,.12);
+          
+            border-color: #c99d33;
+          }
+          
+          .homeIcon {
+            font-size: 28px;
+          }
+          
+          .homeText {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+          }
+          
+          .brand {
+            font-size: 19px;
+            font-weight: 800;
+            color: #3d2d0d;
+          }
+          
+          .tagline {
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #7c6730;
+            font-weight: 700;
           }
 
           .hero {
@@ -567,6 +632,18 @@ export default function ListingPage({ listing }) {
             .whyTitle {
               font-size: 20px;
             }
+              .topNav {
+                justify-content: center;
+              }
+              
+              .homeLink {
+                width: 100%;
+                justify-content: center;
+              }
+              
+              .brand {
+                font-size: 17px;
+              }
           }
 
           @media (max-width: 520px) {
