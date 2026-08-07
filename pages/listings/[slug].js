@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import { LISTINGS, getListing } from "../../lib/listings";
 import ListingPhotoGallery from "../../components/ListingPhotoGallery";
 
@@ -60,12 +61,19 @@ export default function ListingPage({ listing }) {
             href="https://www.joselo.net"
             className="homeLink"
           >
-            <span className="homeIcon">🏠</span>
-        
-            <span className="homeText">
-              <span className="brand">Joselo.net</span>
-              <span className="tagline">Discover More Properties</span>
-            </span>
+            <Image
+              src="/images/joselo-logo.png"
+              alt="Joselo.net"
+              width={140}
+              height={42}
+              className="homeLogo"
+            />
+
+<span className="homeText">
+  <span className="tagline">
+    View All Listings →
+  </span>
+</span>
           </a>
         </div>
       
@@ -314,16 +322,11 @@ export default function ListingPage({ listing }) {
             border-color: #c99d33;
           }
           
-          .homeIcon {
-            font-size: 28px;
+          .homeLogo {
+            height: 34px;
+            width: auto;
           }
-          
-          .homeText {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.15;
-          }
-          
+                    
           .brand {
             font-size: 19px;
             font-weight: 800;
@@ -331,11 +334,11 @@ export default function ListingPage({ listing }) {
           }
           
           .tagline {
-            font-size: 11px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: #7c6730;
+            font-size: 15px;
             font-weight: 700;
+            color: #14356b;      /* Matches your logo blue */
+            letter-spacing: .03em;
+            text-transform: none;
           }
 
           .hero {
