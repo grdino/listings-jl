@@ -323,12 +323,16 @@ export default function ListingPage({ listing }) {
           }
           
           .homeLogo {
-            height: 30px;
+            height: 28px;      /* Was 34px */
             width: auto;
           
+            display: block;
+          
             filter:
-              drop-shadow(0 0 1px rgba(255,255,255,.45))
-              drop-shadow(0 0 3px rgba(255,255,255,.25));
+              drop-shadow(0 1px 2px rgba(255,255,255,.35))
+              brightness(1.02);
+          
+            opacity: .96;
           }
                     
           .brand {
