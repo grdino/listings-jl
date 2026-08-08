@@ -71,7 +71,7 @@ export default function ListingPage({ listing }) {
 
 <span className="homeText">
   <span className="tagline">
-    View All Listings →
+    All Listings →
   </span>
 </span>
           </a>
