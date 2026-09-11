@@ -57,29 +57,45 @@ function ListingSection({ title, listings, muted = false }) {
 
       <div className="cards">
         {listings.map((listing) => (
-          <Link
+          <div
             key={listing.slug}
-            href={`/listings/${listing.slug}`}
             className={`card ${muted ? "muted" : ""}`}
           >
-            <div className="imageWrap">
-              <img
-                src={listing.photos?.[0]?.src || "/photos/placeholder.jpg"}
-                alt={listing.photos?.[0]?.alt || listing.title}
-              />
-
-              {listing.status === "sold" && (
-                <div className="statusBadge">Sold</div>
-              )}
-            </div>
-
-            <div className="content">
-              <div className="price">{listing.priceText}</div>
-              <h3>{listing.title}</h3>
-              <p>{listing.subtitle}</p>
-              <div className="area">{listing.addressOrArea}</div>
-            </div>
-          </Link>
+            <Link
+              href={`/listings/${listing.slug}`}
+              className="listingLink"
+            >
+              <div className="imageWrap">
+                <img
+                  src={listing.photos?.[0]?.src || "/photos/placeholder.jpg"}
+                  alt={listing.photos?.[0]?.alt || listing.title}
+                />
+        
+                {listing.status === "sold" && (
+                  <div className="statusBadge">Sold</div>
+                )}
+              </div>
+        
+              <div className="content">
+                <div className="price">{listing.priceText}</div>
+                <h3>{listing.title}</h3>
+                <p>{listing.subtitle}</p>
+                <div className="area">{listing.addressOrArea}</div>
+              </div>
+            </Link>
+        
+            {listing.title === "Torre Punta Vallarta #1" && (
+              <div className="comparisonWrap">
+                <a
+                  href="https://searchpv.com/property-comparison/44449?return=https%3A%2F%2Fidx.searchpv.com%2Fidx%2Fsearch%2F%3FLimit%3D75%26ListingId%3D44449%26spvTotal%3D1"
+                  className="comparisonButton"
+                >
+                  How does this listing compare?
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            )}
+          </div>
         ))}
       </div>
 
@@ -110,7 +126,7 @@ function ListingSection({ title, listings, muted = false }) {
           box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-
+        
         .card:hover {
           transform: translateY(-3px);
           box-shadow: 0 20px 38px rgba(15, 23, 42, 0.12);
@@ -118,6 +134,46 @@ function ListingSection({ title, listings, muted = false }) {
 
         .card.muted {
           opacity: 0.82;
+        }
+
+        .listingLink {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+        }
+        
+        .comparisonWrap {
+          padding: 0 18px 18px;
+        }
+        
+        .comparisonButton {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        
+          width: 100%;
+          box-sizing: border-box;
+        
+          padding: 12px 15px;
+          border-radius: 12px;
+        
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          color: #166534;
+        
+          font-size: 14px;
+          font-weight: 700;
+          text-decoration: none;
+        
+          transition: background 0.2s ease, border-color 0.2s ease,
+            transform 0.2s ease;
+        }
+        
+        .comparisonButton:hover {
+          background: #dcfce7;
+          border-color: #86efac;
+          transform: translateY(-1px);
         }
 
         .imageWrap {
