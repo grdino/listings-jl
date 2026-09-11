@@ -88,7 +88,7 @@ export default function ListingPage({ listing }) {
         whatsapp: "WhatsApp",
         email: "Email",
         call: "Call",
-        viewMls: "View MLS Listing",
+        viewMls: "View Listing",
         compareListing: "How does this listing compare?",
         whyThisProperty: "Why this property",
         topReasons: "Top reasons",
