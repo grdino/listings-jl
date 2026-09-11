@@ -72,6 +72,7 @@ export default function ListingPage({ listing }) {
         email: "Correo",
         call: "Llamar",
         viewMls: "Ver Propiedad en MLS",
+        compareListing: "¿Cómo se compara esta propiedad?",
         whyThisProperty: "Por qué esta propiedad",
         topReasons: "Razones principales",
         rapidResponse: "Respuesta Rápida",
@@ -245,18 +246,28 @@ export default function ListingPage({ listing }) {
               ))}
             </div>
 
-            {/* MLS LINK */}
-            {listing.mlsLink && (
-              <p className="mlsNote">
+            {/* MLS + COMPARISON LINKS */}
+            <div className="listingResearchLinks">
+              {listing.mlsLink && (
                 <a
                   href={listing.mlsLink}
                   target="_blank"
                   rel="noreferrer"
+                  className="mlsLink"
                 >
                   {ui.viewMls}
                 </a>
-              </p>
-            )}
+              )}
+            
+              {listing.slug === "tpv1" && (
+                <a
+                  href="https://searchpv.com/property-comparison/44449?return=https%3A%2F%2Fidx.searchpv.com%2Fidx%2Fsearch%2F%3FLimit%3D75%26ListingId%3D44449%26spvTotal%3D1"
+                  className="comparisonLink"
+                >
+                  {ui.compareListing} <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
           </div>
 
           <ListingPhotoGallery
@@ -737,6 +748,52 @@ export default function ListingPage({ listing }) {
 
           .factValue {
             margin-top: 2px;
+          }
+
+          /* =========================================
+             LISTING RESEARCH LINKS
+          ========================================= */
+          
+          .listingResearchLinks {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 16px;
+          }
+          
+          .mlsLink {
+            color: #6b21a8;
+            text-decoration: underline;
+            font-size: 15px;
+          }
+          
+          .comparisonLink {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+          
+            padding: 10px 14px;
+            border-radius: 12px;
+          
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+          
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+          
+            transition:
+              background 0.2s ease,
+              border-color 0.2s ease,
+              transform 0.2s ease;
+          }
+          
+          .comparisonLink:hover {
+            background: #dcfce7;
+            border-color: #86efac;
+            transform: translateY(-1px);
           }
 
           /* =========================================
