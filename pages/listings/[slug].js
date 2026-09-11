@@ -89,6 +89,7 @@ export default function ListingPage({ listing }) {
         email: "Email",
         call: "Call",
         viewMls: "View MLS Listing",
+        compareListing: "How does this listing compare?",
         whyThisProperty: "Why this property",
         topReasons: "Top reasons",
         rapidResponse: "Rapid Response",
