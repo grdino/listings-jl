@@ -35,6 +35,10 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
           width: 100%;
           margin: 32px 0;
         }
+        
+        .mobile-gallery-note {
+          display: none;
+        }
 
         .gallery-grid {
           display: grid;
@@ -90,6 +94,32 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
         }
 
         @media (max-width: 768px) {
+          .mobile-gallery-note {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 14px;
+            color: #0f172a;
+          }
+
+          .mobile-gallery-note-line1 {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+          }
+
+          .mobile-gallery-note-line2 {
+            display: block;
+            margin-top: 4px;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: #334155;
+          }
+          
           .gallery-grid {
             display: block;
             height: auto;
@@ -107,6 +137,11 @@ export default function ListingPhotoGallery({ photos = [], title = "Property pho
         }
       `}</style>
 
+      <div className="mobile-gallery-note">
+        <span className="mobile-gallery-note-line1">Tap Photo</span>
+          <span className="mobile-gallery-note-line2">To View All Photos</span>
+        </div>
+      
       <div className="gallery-grid">
         <button className="gallery-main" onClick={() => setIndex(0)}>
           <img src={photos[0].src} alt={photos[0].alt || title} />
