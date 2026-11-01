@@ -105,29 +105,53 @@ export default function ListingPage({ listing }) {
     document.documentElement.lang = isSpanish ? "es-MX" : "en";
   }, [isSpanish]);
 
+  const canonicalUrl = `https://listings.joselo.net/listings/${listing.slug}`;
+  const sold = listing.status === "sold";
+  const agentContext = sold ? "Listing agents at time of sale" : "MLS listing agents";
+  const seoTitle = `${listing.title} | ${sold ? "Sold" : "For Sale"} | Gerry Ray & Joselo Cortes`;
+  const seoDescription = `${listing.title} (${listing.status === "sold" ? "sold" : "active"}), MLS #${listing.mlsNumber}. ${agentContext}: Gerry Ray (listing agent) and Joselo Cortes (co-listing agent), Ron Morgan Properties. ${listing.seoDescription || listing.subtitle}`;
+  const propertySchema = {
+    "@context": "https://schema.org", "@type": "RealEstateListing",
+    name: `${listing.title} — ${sold ? "Sold" : "For Sale"}`,
+    url: canonicalUrl,
+    description: seoDescription,
+    identifier: { "@type": "PropertyValue", propertyID: "MLS", value: listing.mlsNumber },
+    dateModified: listing.closedDate || undefined,
+    about: { "@type": "Accommodation", name: listing.title, address: { "@type": "PostalAddress", addressLocality: "Puerto Vallarta", addressRegion: "Jalisco", addressCountry: "MX" } },
+    publisher: { "@type": "Organization", name: "Ron Morgan Properties" },
+    mentions: [
+      { "@type": "Person", name: "Gerry Ray", jobTitle: sold ? "Listing Agent at Time of Sale" : "MLS Listing Agent", url: "https://gerryray.net" },
+      { "@type": "Person", name: "Joselo Cortes", jobTitle: sold ? "Co-Listing Agent at Time of Sale" : "MLS Co-Listing Agent", url: "https://joselo.net" }
+    ],
+    image: listing.photos?.[0]?.src ? `https://listings.joselo.net${listing.photos[0].src}` : undefined
+  };
   return (
     <>
       <Head>
-        <title>{`${content.title} | ${content.addressOrArea}`}</title>
+        <title>{seoTitle}</title>
 
         <meta
           name="description"
-          content={content.seoDescription || content.subtitle}
+          content={seoDescription}
         />
 
         <meta
           property="og:title"
-          content={`${content.title} | ${content.addressOrArea}`}
+          content={seoTitle}
         />
 
         <meta
           property="og:description"
-          content={content.seoDescription || content.subtitle}
+          content={seoDescription}
         />
 
         {listing.photos?.[0]?.src && (
-          <meta property="og:image" content={listing.photos[0].src} />
+          <meta property="og:image" content={`https://listings.joselo.net${listing.photos[0].src}`} />
         )}
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(propertySchema).replace(/</g, "\u003c") }} />
       </Head>
 
       <main className="page">
@@ -174,8 +198,15 @@ export default function ListingPage({ listing }) {
             <p className="subtitle">{content.subtitle}</p>
 
             <div className="priceRow">
-              <div className="price">{listing.priceText}</div>
+              <div className="price">{sold ? (isSpanish ? "Vendido: " : "Sold: ") : ""}{listing.priceText}</div>
 
+            </div>
+            <div className="listingAttribution" style={{margin:"12px 0",fontSize:13,color:"#334155",lineHeight:1.6}}>
+              <strong>{sold ? (isSpanish ? "Agentes al momento de la venta" : "Listing Agents at Time of Sale") : (isSpanish ? "Agentes de la ficha MLS" : "MLS Listing Agents")}</strong>
+              <div>MLS #{listing.mlsNumber}{listing.closedDate ? ` · ${isSpanish ? "Cierre" : "Closed"}: ${new Date(`${listing.closedDate}T12:00:00`).toLocaleDateString(isSpanish ? "es-MX" : "en-US", { year: "numeric", month: "long", day: "numeric" })}` : ""}</div>
+              <div>{isSpanish ? "Agente titular" : "Listing Agent"}: Gerry Ray · {isSpanish ? "Coagente" : "Co-Listing Agent"}: Joselo Cortes</div>
+              <div>Ron Morgan Properties</div>
+              {sold && <div>{isSpanish ? "Registro histórico de venta; no es una oferta vigente." : "Historical sale record; this is not a current offer for sale."}</div>}
             </div>
             <AgentContacts listing={content} isSpanish={isSpanish} compact />
 

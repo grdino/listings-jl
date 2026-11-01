@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import { LISTINGS } from "../../lib/listings";
 
 export default function ListingsIndex() {
@@ -9,12 +10,32 @@ export default function ListingsIndex() {
     .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
   const soldListings = items.filter((l) => l.status === "sold");
 
+  const siteUrl = "https://listings.joselo.net";
+  const listSchema = {
+    "@context": "https://schema.org", "@type": "CollectionPage",
+    name: "Puerto Vallarta Listings | Gerry Ray & Joselo Cortes",
+    url: `${siteUrl}/listings`,
+    mainEntity: { "@type": "ItemList", itemListElement: [...activeListings, ...soldListings].map((l, i) => ({
+      "@type": "ListItem", position: i + 1, name: l.title,
+      url: `${siteUrl}/listings/${l.slug}`
+    })) }
+  };
   return (
+    <>
+    <Head>
+      <title>Puerto Vallarta MLS Listings | Gerry Ray & Joselo Cortes</title>
+      <meta name="description" content="Explore active and sold Puerto Vallarta MLS listings represented by Gerry Ray, listing agent, and Joselo Cortes, co-listing agent, of Ron Morgan Properties." />
+      <link rel="canonical" href={`${siteUrl}/listings`} />
+      <meta property="og:title" content="Puerto Vallarta MLS Listings | Gerry Ray & Joselo Cortes" />
+      <meta property="og:description" content="Active listings and past sales represented by Gerry Ray and Joselo Cortes of Ron Morgan Properties." />
+      <meta property="og:url" content={`${siteUrl}/listings`} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema).replace(/</g, "\u003c") }} />
+    </Head>
     <main className="page">
       <header className="header">
         <div className="team">Gerry Ray + Joselo Cortes <span> | Ron Morgan Properties</span></div>
         <h1>Puerto Vallarta Listings</h1>
-        <p>Explore current and recently sold properties.</p>
+        <p>Explore active MLS listings and past sales represented by Gerry Ray (Listing Agent) and Joselo Cortes (Co-Listing Agent) of Ron Morgan Properties.</p>
       </header>
 
       <ListingSection title="Active Listings" listings={activeListings} />
@@ -48,6 +69,7 @@ export default function ListingsIndex() {
         }
       `}</style>
     </main>
+    </>
   );
 }
 
@@ -80,7 +102,8 @@ function ListingSection({ title, listings, muted = false }) {
               </div>
         
               <div className="content">
-                <div className="price">{listing.priceText}</div>
+                <div className="price">{listing.status === "sold" ? "Sold: " : ""}{listing.priceText}</div>
+                <div className="mlsMeta">MLS #{listing.mlsNumber}{listing.closedDate ? ` · Closed ${new Date(`${listing.closedDate}T12:00:00`).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}` : ""}</div>
                 <h3>{listing.title}</h3>
                 <p>{listing.subtitle}</p>
                 <div className="area">{listing.addressOrArea}</div>
@@ -135,6 +158,7 @@ function ListingSection({ title, listings, muted = false }) {
           box-shadow: 0 20px 38px rgba(15, 23, 42, 0.12);
         }
 
+        .mlsMeta { font-size: 12px; color: #64748b; margin-top: 7px; }
         .card.muted {
           opacity: 0.82;
         }
